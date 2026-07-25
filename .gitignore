@@ -1,0 +1,40 @@
+# ── Weights and checkpoints (large files — never commit) ──
+# Git cannot re-include a file whose parent directory is excluded, so the
+# directories are opened up step by step before whitelisting the two boundary
+# files we DO ship (~4 KB each).
+weights/*
+!weights/boundaries/
+weights/boundaries/*
+
+# Committed so the repo works out of the box with no extraction step:
+!weights/boundaries/hair_black.npy
+!weights/boundaries/hair_length.npy
+
+# ── Report source (kept out of the repo — PDF is linked from README, ──
+# ── on Google Drive; figures/ stays tracked since it's referenced) ──
+report/report.pdf
+report/report.tex
+
+# ── Docs (kept local only) ──
+docs/
+
+# ── Vendor repos (cloned by setup.py) ──
+vendor/
+
+# ── Results (generated images) ──
+results/
+
+# ── Python artifacts ──
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.env
+
+# ── Notebooks ──
+.ipynb_checkpoints/
+
+# ── OS files ──
+.DS_Store
+Thumbs.db

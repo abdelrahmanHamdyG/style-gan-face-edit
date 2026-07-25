@@ -1,0 +1,28 @@
+# StyleGAN Face Edit — Python Dependencies
+# Install with: pip install -r requirements.txt
+
+# ── Core: generator, encoder, image I/O ──
+torch
+torchvision
+numpy
+Pillow
+scipy                    # align_face.py — gaussian_filter for the FFHQ warp
+
+# ── Setup ──
+gdown>=5.1.0             # setup.py — downloads the checkpoints from Google Drive
+certifi                  # _ssl_patch.py — CA bundle for the Windows SSL workaround
+
+# ── Measurement (measure_results.py) ──
+lpips>=0.1.4             # perceptual-change metric
+transformers>=4.30       # hair_parser.py — SegFormer face-parsing model
+
+# ── Boundary extraction (extract_hair_direction.py, optional) ──
+# Only needed if you regenerate the hair directions; the ones in
+# weights/boundaries/ are committed, so a normal run does not need these.
+open_clip_torch>=2.24.0  # CLIP scoring for hair colour
+scikit-learn>=1.3.0      # LinearSVC that fits the boundary
+
+# dlib — best installed via conda to avoid compilation issues:
+#   conda install -c conda-forge dlib
+# If you prefer pip (requires CMake + C++ compiler):
+#   pip install dlib
