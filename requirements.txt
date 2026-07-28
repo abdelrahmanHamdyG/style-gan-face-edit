@@ -7,6 +7,10 @@ torchvision
 numpy
 Pillow
 scipy                    # align_face.py — gaussian_filter for the FFHQ warp
+matplotlib               # required by vendor/encoder4editing/models/psp.py
+                         # (calls matplotlib.use('Agg') at import time) — a
+                         # transitive dependency of the cloned repo, not of
+                         # our own code; invert.py fails to import without it
 
 # ── Setup ──
 gdown>=5.1.0             # setup.py — downloads the checkpoints from Google Drive
