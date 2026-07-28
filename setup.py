@@ -22,6 +22,15 @@ E4E_DIR      = os.path.join(VENDOR_DIR, "encoder4editing")
 WEIGHTS_DIR  = os.path.join(PROJECT_ROOT, "weights")
 PATCHES_DIR  = os.path.join(PROJECT_ROOT, "src", "patches")
 
+# Fix the Windows SSL cert-store crash (ssl.SSLError: [ASN1: NOT_ENOUGH_DATA])
+# before the dlib landmark file is downloaded via urllib below. gdown (used
+# for the other two checkpoints) is unaffected since it already relies on
+# certifi rather than the OS trust store.
+_SRC_DIR = os.path.join(PROJECT_ROOT, "src")
+if _SRC_DIR not in sys.path:
+    sys.path.insert(0, _SRC_DIR)
+import _ssl_patch  # noqa: F401,E402
+
 # Hair boundaries ship in the repo itself (~4 KB each), so a fresh clone can
 # edit hair immediately with no extraction step and nothing to download.
 # Regenerate with: python src/extract_hair_direction.py --all
